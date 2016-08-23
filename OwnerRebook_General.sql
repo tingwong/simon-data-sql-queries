@@ -1,6 +1,5 @@
 SELECT
 pown.id AS 'user_id',
-CASE WHEN stay.start_date = CURDATE() - INTERVAL 344 DAY THEN 1 ELSE 0 END AS 'valid_for_owner_rebook_anniversary',
 ausit.first_name AS 'sitter_first_name',
 CONCAT('https://www.rover.com/members/',psit.slug) AS 'sitter_profile_url_string',
 CASE WHEN (cc.service_type = 'overnight-boarding' AND servhome.active = 1 AND servhome.searchable = 1) OR
