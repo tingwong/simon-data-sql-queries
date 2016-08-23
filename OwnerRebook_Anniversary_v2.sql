@@ -1,6 +1,6 @@
 SELECT
 pown.id AS 'user_id',
-CASE WHEN stay.start_date = CURDATE() - INTERVAL 344 DAY THEN 1 ELSE 0 END AS 'valid_for_owner_rebook_anniversary',
+1 AS 'valid_for_owner_rebook_anniversary',
 ausit.first_name AS 'sitter_first_name',
 CONCAT('https://www.rover.com/members/',psit.slug) AS 'sitter_profile_url_string',
 CASE WHEN (cc.service_type = 'overnight-boarding' AND servhome.active = 1 AND servhome.searchable = 1) OR
@@ -55,6 +55,7 @@ LEFT JOIN (SELECT conversation_id,
 LEFT JOIN people_personlocation ppl ON ppl.person_id = psit.id
 LEFT JOIN django_geo_zipcode dgz ON dgz.zip_code = pown.zip_code
 
-WHERE pet.dog_name IS NOT NULL
+WHERE stay.start_date = CURDATE() - INTERVAL 344 DAY 
+and pet.dog_name IS NOT NULL
 
 GROUP BY pown.id
